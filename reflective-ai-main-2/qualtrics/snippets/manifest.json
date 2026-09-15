@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "description": "Post-import Qualtrics JavaScript installation map for the Reflective AI survey shell.",
+  "snippets": [
+    {
+      "qid": "QID3",
+      "file": "01-embedded-data-setup.js",
+      "purpose": "Capture respondent identifiers, assign/persist condition, and initialize export fields.",
+      "required_before_launch": true
+    },
+    {
+      "qid": "QID4",
+      "file": "02-recaptcha-v3.js",
+      "purpose": "Capture reCAPTCHA v3 token for server-side verification.",
+      "required_before_launch": true
+    },
+    {
+      "qid": "QID5",
+      "file": "09-comprehension-check.js",
+      "purpose": "Write comprehension_pass for the study-overview comprehension check.",
+      "required_before_launch": true
+    },
+    {
+      "qid": "QID6",
+      "file": "03-typing-telemetry.js",
+      "purpose": "Record typing telemetry for the daylight-saving response.",
+      "required_before_launch": true
+    },
+    {
+      "qid": "QID7",
+      "file": "04-attention-check.js",
+      "purpose": "Write attention_pass for the instructed-response attention check.",
+      "required_before_launch": true
+    },
+    {
+      "qid": "QID23",
+      "file": "05-prechat-routing.js",
+      "purpose": "Copy treatment/control setup answers into chatbot Embedded Data fields, preserving condition fallback and assignment audit metadata.",
+      "required_before_launch": true
+    },
+    {
+      "qid": "QID24",
+      "file": "06-chatbot-mount.js",
+      "purpose": "Mount the hosted chatbot, pass condition assignment metadata to the backend, and write conversation metadata.",
+      "required_before_launch": true
+    },
+    {
+      "qid": "QID30",
+      "file": "07-motive-total.js",
+      "purpose": "Require six nonnegative motive entries to total exactly 100.",
+      "required_before_launch": true
+    },
+    {
+      "qid": "QID31",
+      "file": "08-allocation.js",
+      "purpose": "Render bystander allocation slider, hide Next until slider interaction, and write allocation Embedded Data.",
+      "required_before_launch": true
+    }
+  ]
+}

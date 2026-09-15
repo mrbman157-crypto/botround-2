@@ -1,0 +1,10 @@
+{
+  "reportMissingImports": "none",
+  "reportMissingTypeArgument": "none",
+  "reportUnknownParameterType": "none",
+  "reportMissingParameterType": "none",
+  "reportUnknownVariableType": "none",
+  "reportUnknownMemberType": "none",
+  "reportAny": "none",
+  "reportExplicitAny": "none"
+}

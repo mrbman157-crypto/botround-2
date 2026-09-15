@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "description": "Embedded Data fields used by the Reflective AI Qualtrics survey and post-import snippets.",
+  "groups": [
+    {
+      "name": "respondent_and_assignment",
+      "fields": [
+        "prolific_pid",
+        "prolific_study_id",
+        "prolific_session_id",
+        "respondent_id",
+        "condition",
+        "condition_assignment_source",
+        "condition_assigned_at"
+      ]
+    },
+    {
+      "name": "prechat_routing",
+      "fields": [
+        "chat_topic_type",
+        "political_topic",
+        "political_topic_other",
+        "political_stance",
+        "political_strength",
+        "activity_topic",
+        "activity_topic_other",
+        "activity_stance",
+        "activity_strength",
+        "topic",
+        "stance",
+        "strength_score"
+      ]
+    },
+    {
+      "name": "screening_and_quality",
+      "fields": [
+        "comprehension_pass",
+        "attention_pass",
+        "typing_word_count_in_range",
+        "typing_duration_ms",
+        "typing_keydown_count",
+        "typing_paste_count",
+        "typing_backspace_count",
+        "typing_word_count",
+        "typing_char_count",
+        "typing_first_key_latency_ms",
+        "typing_mean_interkey_ms",
+        "typing_median_interkey_ms"
+      ]
+    },
+    {
+      "name": "recaptcha",
+      "fields": [
+        "recaptcha_token",
+        "recaptcha_action",
+        "recaptcha_success",
+        "recaptcha_score",
+        "recaptcha_min_score",
+        "recaptcha_score_pass",
+        "recaptcha_action_verified",
+        "recaptcha_action_matches",
+        "recaptcha_hostname",
+        "recaptcha_challenge_ts",
+        "recaptcha_error_codes"
+      ]
+    },
+    {
+      "name": "chatbot_metadata",
+      "fields": [
+        "conversation_id",
+        "transcript_url",
+        "chat_completed",
+        "chat_turn_count",
+        "chat_min_user_turns",
+        "chat_max_user_turns",
+        "completion_reason",
+        "chat_started_at",
+        "chat_completed_at",
+        "chat_duration_ms"
+      ]
+    },
+    {
+      "name": "postchat_widgets",
+      "fields": [
+        "motive_total",
+        "allocation_label_order",
+        "allocation_democrat",
+        "allocation_republican",
+        "allocation_interacted"
+      ]
+    }
+  ]
+}
