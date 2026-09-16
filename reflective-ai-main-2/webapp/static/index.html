@@ -1,60 +1,53 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Reflective Sandbox</title>
+    <title>Reflexions-Sandbox</title>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
     <main class="app-shell">
       <header class="topbar">
         <div>
-          <h1>Reflective Sandbox</h1>
+          <h1>Reflexions-Sandbox</h1>
           <p id="model-label"></p>
         </div>
-        <button id="new-conversation" type="button">New conversation</button>
+        <button id="new-conversation" type="button">Neues Gespräch</button>
       </header>
 
       <section id="setup-panel" class="setup-panel">
         <div class="setup-copy">
-          <p class="eyebrow">Before the conversation starts</p>
-          <h2>Answer these three setup questions.</h2>
+          <p class="eyebrow">Bevor das Gespräch beginnt</p>
+          <h2>Beantworte diese drei Fragen.</h2>
           <p>
-            Your condition, topic, position or preference, and certainty give the
-            chat enough context to begin.
+            Dein Thema, deine Position oder Präferenz und wie stark du diese Ansicht
+            vertrittst, geben dem Chat genug Kontext für den Start.
           </p>
         </div>
         <form id="setup-form" class="setup-form" novalidate>
           <label>
-            <span>Condition</span>
-            <select id="condition-input" name="condition" required>
-              <option value="treatment">Treatment: reflective political chat</option>
-              <option value="control">Control: neutral hobby or interest chat</option>
-            </select>
-          </label>
-          <label>
-            <span>Topic</span>
+            <span>Thema</span>
             <input
               id="topic-input"
               name="topic"
               autocomplete="off"
-              placeholder="Example: housing policy or cooking"
+              placeholder="Beispiel: Wohnungspolitik oder Kochen"
               required
             />
           </label>
           <label>
-            <span>View or preference</span>
+            <span>Ansicht oder Präferenz</span>
             <input
               id="stance-input"
               name="stance"
               autocomplete="off"
-              placeholder="Briefly state your view or what you enjoy"
+              placeholder="Beschreibe kurz deine Ansicht oder was dir gefällt"
               required
             />
           </label>
           <label>
-            <span>How strongly do you hold this view, or how much do you enjoy it?</span>
+            <span>Wie stark vertrittst du diese Ansicht, oder wie sehr gefällt dir das?</span>
             <input
               id="strength-input"
               name="strength"
@@ -62,11 +55,11 @@
               min="0"
               max="100"
               step="1"
-              placeholder="0 = low, 100 = high"
+              placeholder="0 = gering, 100 = hoch"
               required
             />
           </label>
-          <button id="setup-submit" type="submit">Start chat</button>
+          <button id="setup-submit" type="submit">Chat starten</button>
         </form>
         <p id="setup-error" class="status error" role="alert"></p>
       </section>
@@ -81,17 +74,17 @@
           aria-live="polite"
           hidden
         >
-          <strong>Conversation complete</strong>
-          <span>Thanks. You can close this page or start a new conversation.</span>
+          <strong>Gespräch beendet</strong>
+          <span>Danke. Du kannst diese Seite schließen oder ein neues Gespräch starten.</span>
         </div>
         <form id="message-form" class="message-form">
           <input
             id="message-input"
             autocomplete="off"
-            placeholder="Type your reply..."
+            placeholder="Antwort eingeben..."
             required
           />
-          <button type="submit">Send</button>
+          <button type="submit">Senden</button>
         </form>
         <p id="chat-status" class="status"></p>
       </section>
