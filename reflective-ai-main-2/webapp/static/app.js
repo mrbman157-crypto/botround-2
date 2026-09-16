@@ -13,7 +13,6 @@ const el = {
   setupPanel: document.getElementById("setup-panel"),
   setupForm: document.getElementById("setup-form"),
   setupSubmit: document.getElementById("setup-submit"),
-  conditionInput: document.getElementById("condition-input"),
   topicInput: document.getElementById("topic-input"),
   stanceInput: document.getElementById("stance-input"),
   strengthInput: document.getElementById("strength-input"),
@@ -95,9 +94,9 @@ function renderMessage(message) {
 function renderTypingBubble() {
   const item = document.createElement("div");
   item.className = "message assistant typing";
-  item.setAttribute("aria-label", "Assistant is thinking");
+  item.setAttribute("aria-label", "Assistent denkt nach");
   item.innerHTML = `
-    <span class="typing-label">Thinking</span>
+    <span class="typing-label">Denkt nach</span>
     <span class="typing-dots" aria-hidden="true">
       <span></span>
       <span></span>
@@ -110,15 +109,15 @@ function renderTypingBubble() {
 }
 
 function setupValidationMessage() {
-  if (!el.topicInput.value.trim()) return "Add a topic before starting the chat.";
+  if (!el.topicInput.value.trim()) return "Gib ein Thema an, bevor der Chat startet.";
   if (!el.stanceInput.value.trim()) {
-    return "Add your view or preference before starting the chat.";
+    return "Gib deine Ansicht oder Präferenz an, bevor der Chat startet.";
   }
   if (!el.strengthInput.value.trim()) {
-    return "Add a strength or enjoyment score from 0 to 100 before starting the chat.";
+    return "Gib einen Wert von 0 bis 100 an, bevor der Chat startet.";
   }
   if (!el.strengthInput.validity.valid) {
-    return "Strength or enjoyment must be a whole number from 0 to 100.";
+    return "Der Wert muss eine ganze Zahl von 0 bis 100 sein.";
   }
   return "";
 }
@@ -131,7 +130,7 @@ function renderConversation(conversation) {
 
   el.setupPanel.hidden = true;
   el.chatPanel.hidden = false;
-  el.contextLine.textContent = `Condition: ${setup.condition || "treatment"} | Topic: ${setup.topic_raw || ""} | Stance/preference: ${setup.stance_raw || ""} | Strength/enjoyment: ${setup.strength_score ?? ""}/100`;
+  el.contextLine.textContent = `Bedingung: ${setup.condition || "treatment"} | Thema: ${setup.topic_raw || ""} | Ansicht/Präferenz: ${setup.stance_raw || ""} | Stärke: ${setup.strength_score ?? ""}/100`;
   el.messages.innerHTML = "";
 
   if (state.openingMessage && !(conversation.messages || []).length) {
@@ -210,13 +209,13 @@ el.setupForm.addEventListener("submit", async (event) => {
     return;
   }
   setBusy(el.setupForm, true);
-  el.setupSubmit.textContent = "Starting...";
+  el.setupSubmit.textContent = "Wird gestartet...";
   try {
     const conversation = await api("/api/conversations", {
       method: "POST",
       body: JSON.stringify({
         survey: {
-          condition: el.conditionInput.value,
+          condition: "treatment",
           topic: el.topicInput.value,
           stance: el.stanceInput.value,
           strength_score: el.strengthInput.value,
@@ -226,10 +225,10 @@ el.setupForm.addEventListener("submit", async (event) => {
     renderConversation(conversation);
     el.messageInput.focus();
   } catch (error) {
-    el.setupError.textContent = error.message || "Failed to start conversation.";
+    el.setupError.textContent = error.message || "Gespräch konnte nicht gestartet werden.";
   } finally {
     setBusy(el.setupForm, false);
-    el.setupSubmit.textContent = "Start chat";
+    el.setupSubmit.textContent = "Chat starten";
   }
 });
 
@@ -261,11 +260,11 @@ el.messageForm.addEventListener("submit", async (event) => {
     renderConversation(conversation);
     el.chatStatus.textContent = "";
     el.messageInput.focus();
-  } catch (error) {
+ } catch (error) {
     typingBubble.remove();
-    el.chatStatus.textContent = error.message || "Failed to send message.";
+    el.chatStatus.textContent = error.message || "Nachricht konnte nicht gesendet werden.";
     scrollToBottom();
-  } finally {
+} finally {
     if (state.isComplete) {
       setComposerEnabled(false);
     } else {
@@ -279,5 +278,5 @@ el.newConversation.addEventListener("click", resetConversation);
 loadMe()
   .then(resetConversation)
   .catch((error) => {
-    el.setupError.textContent = error.message || "Failed to initialize app.";
+    el.setupError.textContent = error.message || "App konnte nicht initialisiert werden.";
   });
