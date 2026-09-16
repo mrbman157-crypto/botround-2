@@ -176,12 +176,7 @@ def _parse_strength(value: object) -> int:
 
 
 def _validate_condition(value: object) -> str:
-    condition = _normalize_text(value).lower()
-    if not condition:
-        return "treatment"
-    if condition not in {"treatment", "control"}:
-        raise ValueError("survey.condition must be treatment or control")
-    return condition
+    return "treatment"
 
 
 def _validate_survey(payload: object) -> tuple[str, str, int, str, str, str]:
