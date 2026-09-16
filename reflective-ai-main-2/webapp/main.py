@@ -235,20 +235,20 @@ def _is_control_state(state: dict[str, object]) -> bool:
 
 def _fallback_final_message(state: dict[str, object]) -> str:
     if _is_control_state(state):
-        return "Thank you for sharing a bit about this interest with me."
-    return "Thank you for taking the time to talk this through."
+        return "Danke, dass du mir ein wenig von diesem Interesse erzählt hast."
+    return "Danke, dass du dir die Zeit genommen hast, das mit mir durchzusprechen."
 
 
 def _final_turn_instruction(state: dict[str, object]) -> str:
     if _is_control_state(state):
         return (
-            "This is the final turn. Give a warm closing response about the participant's "
-            "hobby or interest now. Do not ask another question. Do not introduce politics "
-            "or reflective perspective-taking. End the conversation."
+            "Dies ist der letzte Zug. Gib jetzt eine warme, abschließende Antwort zum Hobby "
+            "oder Interesse der teilnehmenden Person. Stelle keine weitere Frage. Bringe keine "
+            "Politik oder Perspektivwechsel-Reflexion ein. Beende das Gespräch."
         )
     return (
-        "This is the final turn. Give a warm closing response now. "
-        "Do not ask another question. End the conversation."
+        "Dies ist der letzte Zug. Gib jetzt eine warme, abschließende Antwort. "
+        "Stelle keine weitere Frage. Beende das Gespräch."
     )
 
 
