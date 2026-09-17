@@ -419,6 +419,7 @@ def api_create_conversation():
 
     conn = db.connect()
     try:
+        db.delete_stale_conversations(conn)
         conversation_id = db.create_conversation(
             conn,
             user_id=user_id,
@@ -557,9 +558,13 @@ def api_send_message(conversation_id: str):
                     "forced_max_turns" if completion_required else "model_tool"
                 ),
             )
-        response_payload = _conversation_payload(
+                response_payload = _conversation_payload(
             conn, user_id=user_id, conversation_id=conversation_id
         )
+        if final_message is not None:
+            db.delete_conversation(
+                conn, user_id=user_id, conversation_id=conversation_id
+            )
         resp = make_response(jsonify(response_payload))
         return _with_user_cookie(resp, user_id=user_id, needs_cookie=needs_cookie)
     finally:
