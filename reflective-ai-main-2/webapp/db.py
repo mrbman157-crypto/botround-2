@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from runtime_config import DATA_DIR
@@ -368,6 +368,24 @@ def export_conversation(
         ),
     }
 
+def delete_stale_conversations(conn: sqlite3.Connection, *, older_than_hours: int = 24) -> int:
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=older_than_hours)).isoformat()
+    rows = conn.execute(
+        """
+        SELECT conversation_id FROM conversations
+        WHERE completed_at IS NULL AND created_at < ?
+        """,
+        (cutoff,),
+    ).fetchall()
+    for row in rows:
+        conversation_id = row["conversation_id"]
+        conn.execute("DELETE FROM messages WHERE conversation_id = ?", (conversation_id,))
+        conn.execute(
+            "DELETE FROM conversation_state WHERE conversation_id = ?", (conversation_id,)
+        )
+        conn.execute("DELETE FROM conversations WHERE conversation_id = ?", (conversation_id,))
+    conn.commit()
+    return len(rows)
 
 def export_conversation_by_transcript_token(
     conn: sqlite3.Connection, *, conversation_id: str, transcript_token: str
